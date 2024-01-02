@@ -1,0 +1,18 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+.postCodeInput{
+  width: 100%;
+font-size: 18px;
+font-weight: bold;
+color: black;
+}
+.addressInput{
+  width: 100%;
+font-size: 18px;
+font-weight: bold;
+color: black;
+margin-top: 10px;
+}

@@ -1,0 +1,81 @@
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
+
+public class ExSwing extends JFrame {
+
+    private static final long serialVersionUID = 1L;
+    private JPanel contentPane;
+    private JTextField textFieldUsername;
+    private JPasswordField passwordField;
+
+    /**
+     * 애플리케이션을 시작합니다.
+     */
+    public static void main(String[] args) {
+        EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                try {
+                	 ExSwing frame = new  ExSwing();
+                    frame.setVisible(true);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    /**
+     * 프레임을 생성합니다.
+     */
+    public  ExSwing() {
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setBounds(100, 100, 450, 300);
+        contentPane = new JPanel();
+        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+        setContentPane(contentPane);
+        contentPane.setLayout(new BorderLayout(0, 0));
+
+        JPanel panel = new JPanel();
+        contentPane.add(panel, BorderLayout.CENTER);
+        panel.setLayout(null);
+
+        JLabel lblUsername = new JLabel("아이디:");
+        lblUsername.setBounds(50, 50, 60, 25);
+        panel.add(lblUsername);
+
+        textFieldUsername = new JTextField();
+        textFieldUsername.setBounds(120, 50, 200, 25);
+        panel.add(textFieldUsername);
+        textFieldUsername.setColumns(10);
+
+        JLabel lblPassword = new JLabel("비밀번호:");
+        lblPassword.setBounds(50, 100, 60, 25);
+        panel.add(lblPassword);
+
+        passwordField = new JPasswordField();
+        passwordField.setBounds(120, 100, 200, 25);
+        panel.add(passwordField);
+
+        JButton btnLogin = new JButton("로그인");
+        btnLogin.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // 로그인 버튼 클릭 시 수행할 동작을 여기에 추가하세요.
+                String username = textFieldUsername.getText();
+                char[] password = passwordField.getPassword();
+                // 로그인 로직을 작성하세요. (예: 아이디와 비밀번호를 확인하여 로그인 처리)
+            }
+        });
+        btnLogin.setBounds(120, 150, 100, 30);
+        panel.add(btnLogin);
+    }
+}

@@ -1,0 +1,91 @@
+import java.util.Scanner;
+
+public class Cal {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int lastQuestion = 0;
+
+        while (true) {
+            int randomQuestion;
+            
+            if (lastQuestion == 0) {
+                randomQuestion = getRandomNumber(1, 5);
+            } else {
+                randomQuestion = lastQuestion;
+                lastQuestion =0;
+            }
+
+            boolean correct = askQuestion(randomQuestion, scanner);
+
+            if (correct) {
+                System.out.println("정답입니다!");
+            } else {
+                System.out.println("오답입니다. 다시 한 번 시도해보세요.");
+            }
+
+            System.out.print("다른 질문을 하시겠습니까? (y/n/q): q을 입력하시면 종료합니다. ");
+            String answer = scanner.nextLine();
+            if (answer.equalsIgnoreCase("q")) {
+                System.out.println("프로그램을 종료합니다.");
+                break;
+            } else if (answer.equalsIgnoreCase("n")) {
+                lastQuestion = randomQuestion;
+                continue;
+            }
+        }
+
+        scanner.close();
+    }
+
+    static int getRandomNumber(int min, int max) {
+        return (int) (Math.random() * (max - min + 1)) + min;
+    }
+
+    static boolean askQuestion(int qnum, Scanner scanner) {
+        switch (qnum) {
+            case 1:
+                System.out.println("1. Java의 특징을 설명해주세요.");
+                return answercheck(scanner.nextLine(), getJavaFeaturesAnswer());
+            case 2:
+                System.out.println("2. Java의 컴파일 과정에 대해 설명해주세요.");
+                return answercheck(scanner.nextLine(), getCompilationProcessAnswer());
+            case 3:
+                System.out.println("3. Java에서 제공하는 원시 타입들에 무엇이 있고, 각각 몇 바이트를 차지하나요?");
+                return answercheck(scanner.nextLine(), getJavaTypeAnswer());
+            case 4:
+                System.out.println("4. 오버라이딩(Overriding)과 오버로딩(Overloading)에 대해 설명해주세요.");
+                return answercheck(scanner.nextLine(), getJavaRidingAnswer());
+            case 5:
+                System.out.println("5. 객체지향 프로그래밍(OOP)에 대해 설명해주세요.");
+                return answercheck(scanner.nextLine(), getJavaOopAnswer());
+            default:
+                System.out.println("알 수 없는 질문입니다.");
+                return false;
+        }
+    }
+
+    static String getJavaFeaturesAnswer() {
+        return "Java는 객체지향 프로그래밍 언어입니다. 기본 자료형을 제외한 모든 요소들이 객체로 표현되고, 객체 지향 개념의 특징인 캡슐화, 상속, 다형성이 잘 적용된 언어입니다.";
+    }
+
+    static String getCompilationProcessAnswer() {
+        return "1. 개발자가 .java 파일을 생성합니다. 2. build를 수행합니다. 3. java compiler의 javac 명령어를 통해 바이트코드(.class)를 생성합니다. 4. Class Loader를 통해 JVM 메모리 내로 로드합니다. 5. 실행엔진을 통해 컴퓨터가 읽을 수 있는 기계어로 해석되어 실행됩니다. (각 운영체제에 맞는 기계어)";
+    }
+
+    static String getJavaTypeAnswer() {
+        return "정수형 byte, short, int, long 실수형 float, double 문자형 char 논리형 boolean이 있고,정수형 1, 2, 4, 8, 실수형 4, 8, 문자형 2, 논리형 1 바이트를 차지합니다.";
+    }
+
+    static String getJavaRidingAnswer() {
+        return "오버라이딩(Overriding)은 상위 클래스에 있는 메소드를 하위 클래스에서 재정의 하는 것을 말하고,오버로딩(Overloading)은 매개변수의 개수나 타입을 다르게 하여 같은 이름의 메소드를 여러 개 정의하는 것을 말합니다.";
+    }
+
+    static String getJavaOopAnswer() {
+        return "우리가 실생활에서 쓰는 모든 것을 객체라 하며, 객체 지향 프로그래밍은 프로그램 구현에 필요한 객체를 파악하고 상태와 행위를 가진 객체를 만들고 각각의 객체들의 역할이 무엇인지를 정의하여 객체들 간의 상호작용을 통해 프로그램을 만드는 것을 말합니다.";
+    }
+
+    static boolean answercheck(String useranswer, String answer) {
+        return useranswer.trim().equals(answer.trim());
+    }
+}
